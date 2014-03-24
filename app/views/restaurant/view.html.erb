@@ -1,0 +1,66 @@
+<% require 'date' %>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gutsydiner</title>
+	<%= stylesheet_link_tag "application", media: "all",
+	                                     "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+	  <h1><%= @results["name"] %></h1>
+	  <div class="col-md-4">
+		<h2>Categories:</h2>
+		<div>
+			<% @results["categories"].each do |category| %>
+				<%= "and" if category == @results["categories"].last %>
+				<%= category["name"] %><%= ", " unless category == @results["categories"].last %>
+			<% end %>
+		</div>
+	  </div>
+	  <div class="col-md-4">	
+		<h2>Address:</h2>
+		<div>
+			<%= @results["location"]["address"] %><br>
+			<%= @results["location"]["city"] %>, <%= @results["location"]["state"] %><br>
+		</div>
+	  </div>
+	  <div class="col-md-4">
+		<p>
+		<h2>Hours:</h2>
+		<table class="table table-striped">			
+		<% weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]%>
+		<% @hours["hours"]["timeframes"].each do |entry| %>
+		<tr>
+			<td>
+
+					<% if entry["days"].count > 1 %>
+						<%= weekdays[entry["days"].first-1]%> - <%= weekdays[entry["days"].last-1] %>
+					<% else %>
+						<%= weekdays[entry["days"].first-1] %>
+					<% end %>
+
+			</td> 
+			<td><%= entry["open"][0]["start"] %> to <%= entry["open"][0]["end"] %></td>
+		</tr>
+		<% end %>
+		</table>
+		</p>
+	  </div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<h2>Reviews</h2>
+			<div>
+	  			Exists? <%= @restaurant %>
+			</div>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+</div>
+</body>
+</html>

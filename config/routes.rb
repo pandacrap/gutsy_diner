@@ -1,4 +1,10 @@
 GutyDiner::Application.routes.draw do
+
+  match '/restaurant', to: 'restaurant#view', via: 'get'
+  match '/search', to: 'static_pages#search', via: 'get'
+  root 'static_pages#home'
+
+  #get "static_pages/home"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

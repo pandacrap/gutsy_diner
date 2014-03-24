@@ -1,0 +1,35 @@
+<h1>gutsyDiner</h1>
+
+<%= form_tag("/search", method: "get") do %>
+  <div class="field">
+	<%= label_tag(:q, "Search:") %><br>
+    <%= text_field_tag(:q) %><br>
+	<%= label_tag(:l, "Location") %><br> 
+    <%= text_field_tag(:l) %><br>
+  </div>
+  <br>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<h1>Searching for <%= @query_param.capitalize %> in <%= @location_param.capitalize %></h1>
+
+<p>
+<% @fresults.venues.each do |c| %><br>	
+	<% unless c["categories"][0].nil? %>
+		<%= c["categories"][0]["name"] %><br>
+
+		<%= c.name %><br>
+		<%= c.location["address"] %> <%= c.location["city"] %><br>
+	<% end %>
+<% end %>
+</p>
+twitter : <%= @twitter %>
+<p>
+<% unless @tweet1.nil? %>
+<% @tweets1.each do |t| %><br>	
+
+	<%= t.text %><br>
+
+<% end %>
+<% end %>
+</p>
