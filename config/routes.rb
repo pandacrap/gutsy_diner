@@ -1,8 +1,12 @@
 GutyDiner::Application.routes.draw do
 
-  match '/restaurant', to: 'restaurant#view', via: 'get'
-  match '/search', to: 'static_pages#search', via: 'get'
-  root 'static_pages#home'
+  resources :restaurants do
+    member do
+      get 'reviews'
+    end
+  end
+  match '/search', to: 'restaurants#view', via: 'get'
+  root 'restaurants#index'
 
   #get "static_pages/home"
   # The priority is based upon order of creation: first created -> highest priority.

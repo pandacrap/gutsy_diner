@@ -7,6 +7,7 @@ gem 'foursquare2'
 gem 'faraday', '0.8.9'
 gem 'geocoder'
 gem 'bootstrap-sass'
+gem 'gmaps4rails'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
