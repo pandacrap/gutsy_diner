@@ -42,16 +42,16 @@ class RestaurantsController < ApplicationController
     
       location = Geocoder.search(params[:location])
     
-      if location.any?
-        lat = location[0].data["geometry"]["location"]["lat"]
-        lng = location[0].data["geometry"]["location"]["lng"]
+  
+        @lat = location[0].data["geometry"]["location"]["lat"]
+        @lng = location[0].data["geometry"]["location"]["lng"]
         formatted_address = location.first.data["geometry"]["formatted_address"]
-      end 
+
     
       query = params[:query]
 
       #@ref = '4d65ca18cfd48eec7c03e697'
-      venues = client.search_venues(:ll => "#{lat},#{lng}", :query => query, :categoryId => "4d4b7105d754a06374d81259,4d4b7105d754a06376d81259")
+      venues = client.search_venues(:ll => "#{@lat},#{@lng}", :query => query, :categoryId => "4d4b7105d754a06374d81259,4d4b7105d754a06376d81259")
       
       @results = venues["venues"]
       
