@@ -1,0 +1,19 @@
+<%= form_for(@restaurant) do |p| %>
+	<%= p.hidden_field 'name', :value => @name %>
+	<%= p.hidden_field 'ref', :value => @ref %>
+	<%= p.fields_for :reviews do |c| %>
+		<div>
+			<div class="field">
+				<%= c.label :title %><br>
+				<%= c.text_field :title %>  
+			</div>
+			<div class="field">
+				<%= c.label :content %><br> 
+			    <%= c.text_area :content, size: "60x12", placeholder: "Write a new review..." %>
+			</div>
+		</div>
+	<% end%>  
+	<div class="field">
+		<%= p.submit "Submit", class: "btn btn-large btn-primary" %>
+	</div>
+<% end %>	
