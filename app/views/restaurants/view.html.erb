@@ -64,7 +64,14 @@
 						<% end %>
 
 				</td> 
-				<td><%= entry["open"][0]["start"] %> to <%= entry["open"][0]["end"] %></td>
+				<td>
+					<% entry["open"].each do |time| %>					
+						<%= convert_12hr_time(time["start"]) %> to <%= convert_12hr_time(time["end"]) %>
+						<% unless time == entry["open"].last %>
+						 <br>
+						<% end %>
+					<% end %>		
+				</td>
 			</tr>
 			<% end %>
 			</table>
