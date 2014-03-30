@@ -5,7 +5,8 @@ GutyDiner::Application.routes.draw do
       get 'reviews'
     end
   end
-  match '/search', to: 'restaurants#view', via: 'get'
+  match '/search', to: 'restaurants#search', via: 'get'
+  match '/view', to: 'restaurants#view', via: 'get'
   root 'restaurants#index'
 
   #get "static_pages/home"

@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+ruby '2.1.0'
+#ruby-gemset=ruby-2.1.0@rails4.0
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
@@ -8,6 +10,7 @@ gem 'faraday', '0.8.9'
 gem 'geocoder'
 gem 'bootstrap-sass'
 gem 'gmaps4rails'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

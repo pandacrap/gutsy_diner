@@ -1,0 +1,7 @@
+<div>
+	<% unless @results["categories"].nil? %>
+		<% @results["categories"].each do |category| %>
+			<h4><span class="label label-info"><%= category["name"] %></span></h4>
+		<% end %>
+	<% end %>
+</div>

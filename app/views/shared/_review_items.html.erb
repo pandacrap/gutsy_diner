@@ -1,0 +1,11 @@
+<div>
+	<p>
+	<% if @review_items.any? %>
+		<table class="table table-striped">			
+			<%= render partial: 'reviews/review', collection: @review_items %>
+		</table>
+	<% else %>
+		<h2>Be the first one to review!</h2>
+	<% end %>	
+	</p>
+</div>	

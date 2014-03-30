@@ -1,0 +1,6 @@
+<div>
+	<%= @results["location"]["address"] unless @results["location"]["address"].nil? %><br>
+	<%= @results["location"]["city"] unless @results["location"]["city"].nil? %><%= ", " unless @results["location"]["city"].nil? %><%= @results["location"]["state"] unless @results["location"]["state"].nil? %><br>
+	<br>
+	<%= static_map_for(@results["location"]["lat"], @results["location"]["lng"]) %>
+</div>

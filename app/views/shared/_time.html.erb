@@ -1,0 +1,24 @@
+<% unless @hours["hours"].empty? %>
+<table class="table table-striped">			
+<% weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]%>
+	<% @hours["hours"]["timeframes"].each do |entry| %>
+	<tr>
+		<td>
+			<% if entry["days"].count > 1 %>
+				<%= weekdays[entry["days"].first-1]%> - <%= weekdays[entry["days"].last-1] %>
+			<% else %>
+				<%= weekdays[entry["days"].first-1] %>
+			<% end %>
+		</td> 
+		<td>
+			<% entry["open"].each do |time| %>					
+				<%= convert_12hr_time(time["start"]) %> to <%= convert_12hr_time(time["end"]) %>
+				<% unless time == entry["open"].last %>
+					<br>
+				<% end %>
+			<% end %>				
+		</td>
+	</tr>
+<% end %>
+</table>
+<% end %>
