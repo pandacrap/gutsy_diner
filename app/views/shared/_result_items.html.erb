@@ -1,0 +1,33 @@
+<% unless @results.nil? %>
+	<h1><%= params[:query].empty? ? "Anything" : @query.capitalize %> near <%= @location.first.data["formatted_address"]%></h1>
+	<table class="table table-striped">			
+		<tr>
+			<td>Name</td>
+			<td>Location</td>
+			<td>Category</td>
+			<td>Ref</td>
+		</tr>
+		<% @results.each do |result| %>
+		<tr>
+			<td><%= link_to result.name, view_path(:ref => result.id) %></td>
+			<td>
+				<div>
+					<%= result["location"]["address"] unless result["location"]["address"].nil? %><br>
+					<%= result["location"]["city"] unless result["location"]["city"].nil? %><%= ", " unless result["location"]["city"].nil? %><%= result["location"]["state"] unless result["location"]["state"].nil? %><br>
+				</div>				
+			</td>
+			<td>
+				<% unless result["categories"].nil? %>
+					<% result["categories"].each do |category| %>
+						<%= "and" if category == result["categories"].last and category != result["categories"].first %>
+						<%= category["name"] %><%= ", " unless category == result["categories"].last %>
+					<% end %>
+				<% end %>
+			</td>
+			<td><%= result["id"] %></td>			
+		</tr>
+		<% end %>
+	</table>
+<% else %>
+	<h1>Sorry, we didn't find any results</h1>
+<% end %>

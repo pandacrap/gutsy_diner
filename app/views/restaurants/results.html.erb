@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="row">
+	  	<div class="col-md-8">	
+		<% if @location.length > 1 %>
+		<h1>We found multiple locations</h1>
+		<table class="table table-striped">			
+			<% @location.each do |location| %>
+			<tr>
+				<td><%= link_to location.data["formatted_address"], search_path(:query => @query, :location => location.data["formatted_address"] )%>
+				</td>
+			</tr>
+			<% end %>
+		</table>
+		<% else %>
+		<h1>Sorry, we couldn't find that location</h1>
+		<% end %>
+		</div>
+	</div>
+</div>
