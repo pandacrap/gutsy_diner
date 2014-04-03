@@ -1,5 +1,6 @@
 GutyDiner::Application.routes.draw do
 
+  devise_for :users
   resources :restaurants do
     member do
       get 'reviews'

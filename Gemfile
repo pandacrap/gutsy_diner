@@ -11,6 +11,7 @@ gem 'geocoder'
 gem 'bootstrap-sass'
 gem 'gmaps4rails'
 gem 'will_paginate'
+gem 'devise'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

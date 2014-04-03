@@ -5,6 +5,8 @@ class RestaurantsController < ApplicationController
   require 'gmaps4rails'
   require 'twitter'
   
+  before_action :authenticate_user!, only: [:new, :create]
+  
   def index
     @restaurant = Restaurant.all
   end
@@ -55,9 +57,11 @@ class RestaurantsController < ApplicationController
     
       @lat = @location.first.data["geometry"]["location"]["lat"]
       @lng = @location.first.data["geometry"]["location"]["lng"]
-  
-      venues = client.search_venues(:ll => "#{@lat},#{@lng}", :query => @query, :categoryId => "4d4b7105d754a06374d81259,4d4b7105d754a06376d81259", :intent => "checkin", :radius => "3000")
+
+      venues = client.search_venues(:ll => "#{@lat},#{@lng}", :query => @query, :categoryId => "4d4b7105d754a06374d81259,4d4b7105d754a06376d81259", :intent => "checkin", :radius => "3000")  
+      #venues = client.explore_venues(:ll => "#{@lat},#{@lng}", :query => @query, :radius => "3000")
       @results = venues["venues"]
+      #@results = venue["groups"][0]["items"][1]
       #@price = @results["attributes"]["groups"][0]["summary"]
     
       #if results.length = 0, then no entries
