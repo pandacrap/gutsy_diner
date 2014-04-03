@@ -4,6 +4,7 @@
 	<%= p.fields_for :reviews do |c| %>
 		<div>
 			<div class="field">
+				<%= c.hidden_field 'user_id', :value => current_user.id %>				
 				<%= c.label :title %><br>
 				<%= c.text_field :title %>  
 			</div>

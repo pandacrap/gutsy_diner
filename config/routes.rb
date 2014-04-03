@@ -8,6 +8,7 @@ GutyDiner::Application.routes.draw do
   end
   match '/search', to: 'restaurants#search', via: 'get'
   match '/view', to: 'restaurants#view', via: 'get'
+  resources :users, only: [:show]
   root 'restaurants#index'
 
   #get "static_pages/home"

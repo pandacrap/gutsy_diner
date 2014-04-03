@@ -4,11 +4,13 @@ class RestaurantsController < ApplicationController
   require 'geocoder'
   require 'gmaps4rails'
   require 'twitter'
+  require 'will_paginate/array'
   
   before_action :authenticate_user!, only: [:new, :create]
   
   def index
-    @restaurant = Restaurant.all
+    @collection = Restaurant.all
+    @restaurant = @collection.paginate(:page => params[:page] || 1, :per_page => 2)
   end
   
   def show    
@@ -60,7 +62,7 @@ class RestaurantsController < ApplicationController
 
       venues = client.search_venues(:ll => "#{@lat},#{@lng}", :query => @query, :categoryId => "4d4b7105d754a06374d81259,4d4b7105d754a06376d81259", :intent => "checkin", :radius => "3000")  
       #venues = client.explore_venues(:ll => "#{@lat},#{@lng}", :query => @query, :radius => "3000")
-      @results = venues["venues"]
+      @results = venues["venues"].paginate(:page => params[:page] || 1, :per_page => 4)
       #@results = venue["groups"][0]["items"][1]
       #@price = @results["attributes"]["groups"][0]["summary"]
     
@@ -106,7 +108,8 @@ class RestaurantsController < ApplicationController
   def new
     @restaurant =  Restaurant.new
     @review = @restaurant.reviews.build
-    @review_list = Restaurant.find_by(ref: @ref).reviews.all    
+    @review_list = Restaurant.find_by(ref: @ref).reviews.all  
+  
 
     if @review_list.nil?
       @review_items = []
@@ -133,6 +136,6 @@ class RestaurantsController < ApplicationController
     
   def restaurant_params
     params.require(:restaurant).permit(:ref, :name, 
-      :reviews_attributes => [:id, :title, :content])  
+      :reviews_attributes => [:id, :title, :content, :user_id])  
   end    
 end

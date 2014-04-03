@@ -2,6 +2,7 @@
 	<div class="row">
 	  	<div class="col-md-6">	
 			<%= render 'shared/result_items' %>
+			<%= will_paginate(@results) %>
 		</div>
 	  	<div class="col-md-6">		
 			<%= render 'shared/google_maps' %>

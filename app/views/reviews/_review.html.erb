@@ -3,4 +3,5 @@
 	<td class="text-left"><%= review.title %></td>	
 	<td class="text-left"><%= review.content %></td>
 	<td class="text-left"><%= review.created_at.strftime("%B %d, %Y") %></td>
+	<td class="text-left"><%= review.user_id.nil? ? 0:review.user.name %></td>
 </tr>
