@@ -4,6 +4,7 @@
 		<table class="table table-striped">			
 			<%= render partial: 'reviews/review', collection: @review_items %>
 		</table>
+		<%= will_paginate(@review_items) %>
 	<% else %>
 		<h2>Be the first one to review!</h2>
 	<% end %>	

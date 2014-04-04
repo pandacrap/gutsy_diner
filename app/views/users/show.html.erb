@@ -2,7 +2,7 @@
 	<table class="table table-striped">			
 		<% @reviews.each do |review| %>
 		<tr>
-			<td><%= review.restaurant.name %></td>
+			<td><%= link_to review.restaurant.name, restaurant_path(review.restaurant) %></td>
 			<td><%= review.title %></td>
 			<td><%= review.content %></td>
 			<td><%= review.created_at %></td>

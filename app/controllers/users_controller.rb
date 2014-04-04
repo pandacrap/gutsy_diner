@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
   def show
-    @reviews = current_user.reviews.all
+    @reviews = User.find_by(id: params[:id]).reviews.all
   end
 end

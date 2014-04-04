@@ -34,7 +34,7 @@ class RestaurantsController < ApplicationController
     if @review_list.nil?
       @review_items = []
     else      
-      @review_items = @review_list.reviews.all
+      @review_items = @review_list.reviews.all.paginate(:page => params[:page] || 1, :per_page => 2)
     end
   end  
   
@@ -96,7 +96,7 @@ class RestaurantsController < ApplicationController
     #retrieve info about restaurant
     @results = client.venue(@ref)
     @name = @results["name"]
-    @price = @results["attributes"]["groups"][0]["summary"]
+    @price = @results["attributes"]["groups"][0]["summary"] rescue "None"
     @hours = client.venue_hours(@ref)
     
     #find existing reviews
@@ -129,7 +129,21 @@ class RestaurantsController < ApplicationController
       @review.save #save review only
     end
     
+    #find existing reviews
+    @review_list = @restaurant
+
+    #could have >= 0 reviews
+    if @review_list.nil?
+      @review_items = []
+    else      
+      @review_items = @review_list.reviews.all.paginate(:page => params[:page] || 1, :per_page => 2)
+    end
+    
     redirect_to @restaurant
+    #respond_to do |format|
+    #      format.html { redirect_to @restaurant }
+    #      format.js
+    #end    
   end
   
   private
